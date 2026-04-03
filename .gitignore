@@ -2,6 +2,9 @@
 *.log
 logs/
 
+# 快取資料
+data/
+
 # Claude Code
 CLAUDE.md
 .claude/
