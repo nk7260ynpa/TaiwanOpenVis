@@ -23,6 +23,17 @@ async def get_counties():
     return data
 
 
+@router.get("/population/towns/all")
+async def get_all_towns():
+    """取得全部鄉鎮人口資料。"""
+    data = read_cache("towns.json")
+    if data is None:
+        logger.info("鄉鎮快取不存在，即時擷取...")
+        data = fetch_town_population()
+        write_cache("towns.json", data)
+    return data
+
+
 @router.get("/population/towns/{county}")
 async def get_towns(county: str):
     """取得指定縣市的鄉鎮人口資料。"""
