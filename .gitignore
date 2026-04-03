@@ -2,8 +2,9 @@
 *.log
 logs/
 
-# Claude Code 指引
+# Claude Code
 CLAUDE.md
+.claude/
 
 # 規格需求文件
 plan/

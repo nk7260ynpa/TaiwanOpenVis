@@ -1,0 +1,19 @@
+schema: spec-driven
+
+context: |
+  專案名稱：TaiwanOpenVis（台灣公開資料視覺化）
+  技術棧：Python (FastAPI, Pandas), D3.js, Docker
+  語言慣例：程式碼英文，文件與註解繁體中文
+  Git：Conventional Commits，繁體中文 commit message
+  程式碼規範：Google Python Style Guide, Google Shell Style Guide
+  部署方式：Docker container
+  日誌：Python logging 模組，輸出至 logs/ 目錄
+
+rules:
+  proposal:
+    - 使用繁體中文撰寫
+    - 包含「非目標」區段明確界定範圍
+    - 提案需包含技術可行性評估
+  tasks:
+    - 每個任務控制在可獨立完成的粒度
+    - 任務需包含驗收條件
