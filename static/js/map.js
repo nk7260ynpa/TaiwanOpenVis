@@ -82,8 +82,8 @@
   function showTooltip(event, html) {
     tooltipEl.innerHTML = html;
     tooltipEl.classList.add("visible");
-    tooltipEl.style.left = event.pageX + 12 + "px";
-    tooltipEl.style.top = event.pageY - 28 + "px";
+    tooltipEl.style.left = event.clientX + 12 + "px";
+    tooltipEl.style.top = event.clientY - 28 + "px";
   }
 
   /** 隱藏 tooltip。 */
@@ -140,8 +140,8 @@
         }
       })
       .on("mousemove", function (event) {
-        tooltipEl.style.left = event.pageX + 12 + "px";
-        tooltipEl.style.top = event.pageY - 28 + "px";
+        tooltipEl.style.left = event.clientX + 12 + "px";
+        tooltipEl.style.top = event.clientY - 28 + "px";
       })
       .on("mouseout", function () {
         d3.select(this).attr("stroke-width", 1).attr("stroke", "#fff");
@@ -211,8 +211,8 @@
         }
       })
       .on("mousemove", function (event) {
-        tooltipEl.style.left = event.pageX + 12 + "px";
-        tooltipEl.style.top = event.pageY - 28 + "px";
+        tooltipEl.style.left = event.clientX + 12 + "px";
+        tooltipEl.style.top = event.clientY - 28 + "px";
       })
       .on("mouseout", function () {
         d3.select(this).attr("stroke-width", 1).attr("stroke", "#fff");

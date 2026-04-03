@@ -180,7 +180,7 @@ body {
 
 /* Tooltip */
 .tooltip {
-  position: absolute;
+  position: fixed;
   pointer-events: none;
   background: rgba(0, 0, 0, 0.85);
   color: #fff;
