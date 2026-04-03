@@ -79,9 +79,15 @@ def fetch_county_density(year: str = "113") -> list[dict[str, Any]]:
         lambda: {"population": 0, "area": 0.0}
     )
     for item in raw:
+        try:
+            population = int(item["people_total"])
+            area = float(item["area"])
+        except (ValueError, TypeError):
+            logger.debug("跳過無效資料: %s", item.get("site_id"))
+            continue
         county = _normalize_name(_extract_county(item["site_id"]))
-        county_agg[county]["population"] += int(item["people_total"])
-        county_agg[county]["area"] += float(item["area"])
+        county_agg[county]["population"] += population
+        county_agg[county]["area"] += area
 
     return [
         {
@@ -112,26 +118,34 @@ def fetch_town_population(year: str = "113") -> list[dict[str, Any]]:
     town_agg: dict[tuple[str, str], dict[str, int]] = defaultdict(
         lambda: {"households": 0, "male": 0, "female": 0}
     )
+    def _safe_int(val):
+        try:
+            return int(val)
+        except (ValueError, TypeError):
+            return 0
+
     for item in raw:
         site = item.get("區域別", "")
+        if len(site) < 3:
+            continue
         county = _normalize_name(_extract_county(site))
         town = _extract_town(site)
         key = (county, town)
 
         male = (
-            int(item.get("共同生活戶_男", 0))
-            + int(item.get("共同事業戶_男", 0))
-            + int(item.get("單獨生活戶_男", 0))
+            _safe_int(item.get("共同生活戶_男", 0))
+            + _safe_int(item.get("共同事業戶_男", 0))
+            + _safe_int(item.get("單獨生活戶_男", 0))
         )
         female = (
-            int(item.get("共同生活戶_女", 0))
-            + int(item.get("共同事業戶_女", 0))
-            + int(item.get("單獨生活戶_女", 0))
+            _safe_int(item.get("共同生活戶_女", 0))
+            + _safe_int(item.get("共同事業戶_女", 0))
+            + _safe_int(item.get("單獨生活戶_女", 0))
         )
         households = (
-            int(item.get("共同生活戶_戶數", 0))
-            + int(item.get("共同事業戶_戶數", 0))
-            + int(item.get("單獨生活戶_戶數", 0))
+            _safe_int(item.get("共同生活戶_戶數", 0))
+            + _safe_int(item.get("共同事業戶_戶數", 0))
+            + _safe_int(item.get("單獨生活戶_戶數", 0))
         )
         town_agg[key]["households"] += households
         town_agg[key]["male"] += male
