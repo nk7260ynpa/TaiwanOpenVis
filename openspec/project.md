@@ -45,3 +45,6 @@
 | [data-pipeline](specs/data-pipeline.md) | 資料擷取與處理管線 | draft |
 | [api-service](specs/api-service.md) | REST API 資料查詢服務 | draft |
 | [visualization-dashboard](specs/visualization-dashboard.md) | 互動式視覺化儀表板 | draft |
+| [population-data-api](specs/population-data-api/spec.md) | 後端人口資料 API（戶政司快取） | active |
+| [taiwan-map-page](specs/taiwan-map-page/spec.md) | 台灣地圖 Choropleth 視覺化 | active |
+| [web-layout](specs/web-layout/spec.md) | 網站頁面佈局（首頁、導覽列、詳情頁） | active |
