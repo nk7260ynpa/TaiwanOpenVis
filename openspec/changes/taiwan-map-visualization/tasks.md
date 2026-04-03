@@ -12,9 +12,9 @@
 
 ## 3. 人口資料 API
 
-- [ ] 3.1 建立 `app/routers/population.py`，實作 `GET /api/population/counties` 端點，回傳縣市人口密度資料。驗收：回傳 JSON 陣列含 22 筆縣市，每筆含 county/population/area/density 欄位
-- [ ] 3.2 實作 `GET /api/population/towns/{county}` 端點，回傳指定縣市的鄉鎮人口資料。驗收：請求 `臺北市` 回傳該市所有鄉鎮區資料；請求不存在縣市回傳 404
-- [ ] 3.3 實作 `GET /api/health` 端點，回傳服務狀態與快取時間。驗收：回傳 JSON 含 status 與 data_cached_at 欄位
+- [x] 3.1 建立 `app/routers/population.py`，實作 `GET /api/population/counties` 端點，回傳縣市人口密度資料。驗收：回傳 JSON 陣列含 22 筆縣市，每筆含 county/population/area/density 欄位
+- [x] 3.2 實作 `GET /api/population/towns/{county}` 端點，回傳指定縣市的鄉鎮人口資料。驗收：請求 `臺北市` 回傳該市所有鄉鎮區資料；請求不存在縣市回傳 404
+- [x] 3.3 實作 `GET /api/health` 端點，回傳服務狀態與快取時間。驗收：回傳 JSON 含 status 與 data_cached_at 欄位
 
 ## 4. 地圖底圖準備
 
