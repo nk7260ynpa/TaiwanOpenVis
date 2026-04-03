@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>資料詳情 - TaiwanOpenVis</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="navbar-brand">TaiwanOpenVis</a>
+        <button class="navbar-toggle" aria-label="選單">&#9776;</button>
+        <ul class="navbar-links">
+            <li><a href="/">首頁</a></li>
+            <li><a href="/map">人口地圖</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <a href="/map" class="btn btn-outline" style="margin-bottom:16px">← 返回地圖</a>
+            <h1 id="countyTitle">載入中...</h1>
+            <p id="countySummary"></p>
+        </div>
+
+        <div class="card">
+            <table class="data-table" id="townTable">
+                <thead>
+                    <tr>
+                        <th data-key="town">鄉鎮市區</th>
+                        <th data-key="households">戶數</th>
+                        <th data-key="male">男性人口</th>
+                        <th data-key="female">女性人口</th>
+                        <th data-key="population">總人口</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/static/js/common.js"></script>
+    <script src="/static/js/detail.js"></script>
+</body>
+</html>
