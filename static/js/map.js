@@ -82,7 +82,7 @@
   function showTooltip(event, html) {
     tooltipEl.innerHTML = html;
     tooltipEl.classList.add("visible");
-    tooltipEl.style.left = event.clientX + 12 + "px";
+    tooltipEl.style.left = event.clientX + 24 + "px";
     tooltipEl.style.top = event.clientY - 28 + "px";
   }
 
@@ -140,7 +140,7 @@
         }
       })
       .on("mousemove", function (event) {
-        tooltipEl.style.left = event.clientX + 12 + "px";
+        tooltipEl.style.left = event.clientX + 24 + "px";
         tooltipEl.style.top = event.clientY - 28 + "px";
       })
       .on("mouseout", function () {
@@ -211,7 +211,7 @@
         }
       })
       .on("mousemove", function (event) {
-        tooltipEl.style.left = event.clientX + 12 + "px";
+        tooltipEl.style.left = event.clientX + 24 + "px";
         tooltipEl.style.top = event.clientY - 28 + "px";
       })
       .on("mouseout", function () {
