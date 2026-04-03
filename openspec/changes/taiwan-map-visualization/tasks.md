@@ -18,9 +18,9 @@
 
 ## 4. 地圖底圖準備
 
-- [ ] 4.1 取得台灣縣市行政區邊界 TopoJSON，存入 `static/data/taiwan-counties.topojson`。驗收：檔案可被 D3.js 正確載入並繪製出台灣輪廓
-- [ ] 4.2 取得台灣鄉鎮市區行政區邊界 TopoJSON，存入 `static/data/taiwan-towns.topojson`。驗收：檔案包含所有鄉鎮市區的幾何資料
-- [ ] 4.3 驗證 TopoJSON 中的地名與戶政司 API 回傳的地名一致，若有差異則建立對照表。驗收：地圖上的每個區塊都能對應到人口資料
+- [x] 4.1 取得台灣縣市行政區邊界 TopoJSON，存入 `static/data/taiwan-counties.topojson`。驗收：檔案可被 D3.js 正確載入並繪製出台灣輪廓
+- [x] 4.2 取得台灣鄉鎮市區行政區邊界 TopoJSON，存入 `static/data/taiwan-towns.topojson`。驗收：檔案包含所有鄉鎮市區的幾何資料
+- [x] 4.3 驗證 TopoJSON 中的地名與戶政司 API 回傳的地名一致，若有差異則建立對照表。驗收：地圖上的每個區塊都能對應到人口資料
 
 ## 5. 前端共用元件
 

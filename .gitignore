@@ -2,8 +2,8 @@
 *.log
 logs/
 
-# 快取資料
-data/
+# 快取資料（根目錄 data/，不含 static/data/）
+/data/
 
 # Claude Code
 CLAUDE.md
