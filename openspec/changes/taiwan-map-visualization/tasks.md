@@ -47,5 +47,5 @@
 
 ## 9. Docker 化與測試
 
-- [ ] 9.1 確認 `docker/Dockerfile` 包含所有依賴與正確的啟動指令。驗收：`bash docker/build.sh && bash run.sh` 可完整啟動服務
-- [ ] 9.2 建立 `tests/` 目錄，撰寫 API 端點的單元測試。驗收：`pytest tests/` 全部通過
+- [x] 9.1 確認 `docker/Dockerfile` 包含所有依賴與正確的啟動指令。驗收：`bash docker/build.sh && bash run.sh` 可完整啟動服務
+- [x] 9.2 建立 `tests/` 目錄，撰寫 API 端點的單元測試。驗收：`pytest tests/` 全部通過
