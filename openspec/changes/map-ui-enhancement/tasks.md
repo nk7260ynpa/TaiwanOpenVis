@@ -16,9 +16,9 @@
 
 ## 4. 主題切換功能
 
-- [ ] 4.1 在 `static/js/common.js` 新增主題切換邏輯：讀取 `localStorage` 偏好 → 若無則偵測 `prefers-color-scheme` → 套用 `data-theme` 屬性至 `<html>`。驗收：頁面載入時正確套用已儲存偏好或系統偏好
-- [ ] 4.2 在 `static/js/common.js` 新增 `toggleTheme()` 函式，切換 `data-theme` 並存入 `localStorage`。驗收：呼叫函式後主題切換且偏好持久化
-- [ ] 4.3 在所有頁面的導覽列（`index.html`, `map.html`, `detail.html`）新增主題切換按鈕，綁定 `toggleTheme()`。驗收：所有頁面導覽列顯示切換按鈕，點擊後主題切換
+- [x] 4.1 在 `static/js/common.js` 新增主題切換邏輯：讀取 `localStorage` 偏好 → 若無則偵測 `prefers-color-scheme` → 套用 `data-theme` 屬性至 `<html>`。驗收：頁面載入時正確套用已儲存偏好或系統偏好
+- [x] 4.2 在 `static/js/common.js` 新增 `toggleTheme()` 函式，切換 `data-theme` 並存入 `localStorage`。驗收：呼叫函式後主題切換且偏好持久化
+- [x] 4.3 在所有頁面的導覽列（`index.html`, `map.html`, `detail.html`）新增主題切換按鈕，綁定 `toggleTheme()`。驗收：所有頁面導覽列顯示切換按鈕，點擊後主題切換
 
 ## 5. 暗色模式下地圖適配
 
