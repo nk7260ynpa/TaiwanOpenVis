@@ -109,8 +109,8 @@
     const projection = createProjection(geojson);
     const path = d3.geoPath().projection(projection);
 
-    const colorScale = createColorScale(countyData, "density");
-    drawLegend(colorScale, "人口密度：人/km²");
+    const colorScale = createColorScale(countyData, "population");
+    drawLegend(colorScale, "人口數");
 
     g.transition().duration(500).attr("transform", "");
 
@@ -121,7 +121,7 @@
       .attr("d", path)
       .attr("fill", (d) => {
         const info = countyLookup.get(d.properties.COUNTYNAME);
-        return info ? colorScale(info.density) : "#ccc";
+        return info ? colorScale(info.population) : "#ccc";
       })
       .attr("stroke", "#fff")
       .attr("stroke-width", 1)
