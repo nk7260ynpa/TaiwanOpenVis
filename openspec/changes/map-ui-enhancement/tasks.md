@@ -10,9 +10,9 @@
 
 ## 3. 暗色模式 CSS 變數
 
-- [ ] 3.1 在 `static/css/style.css` 新增 `[data-theme="dark"]` 選擇器，定義暗色主題的 CSS 變數（`--bg`, `--bg-card`, `--text`, `--text-light`, `--border`, `--primary` 等）。驗收：當 `<html>` 設定 `data-theme="dark"` 時，頁面配色切換為暗色
-- [ ] 3.2 在 `static/css/style.css` 新增 `@media (prefers-color-scheme: dark)` 規則，作為未儲存偏好時的預設值。驗收：系統偏好為暗色時網站自動套用暗色主題
-- [ ] 3.3 調整暗色模式下的地圖相關樣式：卡片背景、地圖邊框色、tooltip 背景。驗收：暗色模式下地圖 Choropleth 色彩對比清晰
+- [x] 3.1 在 `static/css/style.css` 新增 `[data-theme="dark"]` 選擇器，定義暗色主題的 CSS 變數（`--bg`, `--bg-card`, `--text`, `--text-light`, `--border`, `--primary` 等）。驗收：當 `<html>` 設定 `data-theme="dark"` 時，頁面配色切換為暗色
+- [x] 3.2 在 `static/css/style.css` 新增 `@media (prefers-color-scheme: dark)` 規則，作為未儲存偏好時的預設值。驗收：系統偏好為暗色時網站自動套用暗色主題
+- [x] 3.3 調整暗色模式下的地圖相關樣式：卡片背景、地圖邊框色、tooltip 背景。驗收：暗色模式下地圖 Choropleth 色彩對比清晰
 
 ## 4. 主題切換功能
 
