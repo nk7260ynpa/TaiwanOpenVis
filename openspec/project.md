@@ -48,3 +48,4 @@
 | [population-data-api](specs/population-data-api/spec.md) | 後端人口資料 API（戶政司快取） | active |
 | [taiwan-map-page](specs/taiwan-map-page/spec.md) | 台灣地圖 Choropleth 視覺化 | active |
 | [web-layout](specs/web-layout/spec.md) | 網站頁面佈局（首頁、導覽列、詳情頁） | active |
+| [dark-mode](specs/dark-mode/spec.md) | 暗色模式支援（系統偵測、手動切換、持久化） | active |
