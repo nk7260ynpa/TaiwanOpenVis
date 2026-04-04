@@ -96,6 +96,59 @@
     return d3.geoMercator().fitSize([WIDTH, HEIGHT], geojson);
   }
 
+  /** 在 SVG 內部左上角繪製標題 overlay。 */
+  function drawMapTitle(title, subtitle) {
+    g.selectAll(".map-title-group").remove();
+    const titleGroup = g.append("g").attr("class", "map-title-group");
+
+    const padding = 12;
+    const titleY = 36;
+    const subtitleY = subtitle ? 60 : 0;
+
+    // 半透明背景
+    const bgRect = titleGroup
+      .append("rect")
+      .attr("class", "map-title-bg")
+      .attr("x", 8)
+      .attr("y", 8)
+      .attr("rx", 6)
+      .attr("ry", 6)
+      .attr("fill", "var(--bg-card, #ffffff)")
+      .attr("fill-opacity", 0.85);
+
+    // 主標題
+    const titleText = titleGroup
+      .append("text")
+      .attr("class", "map-title-text")
+      .attr("x", 8 + padding)
+      .attr("y", titleY)
+      .attr("font-size", "22px")
+      .attr("font-weight", "700")
+      .attr("fill", "var(--text, #2d3748)")
+      .text(title);
+
+    let bgHeight = titleY + padding - 8;
+
+    // 副標題
+    if (subtitle) {
+      titleGroup
+        .append("text")
+        .attr("class", "map-title-text")
+        .attr("x", 8 + padding)
+        .attr("y", subtitleY)
+        .attr("font-size", "14px")
+        .attr("fill", "var(--text-light, #718096)")
+        .text(subtitle);
+      bgHeight = subtitleY + padding - 8;
+    }
+
+    // 計算背景寬度
+    const titleBBox = titleText.node().getBBox();
+    const bgWidth = titleBBox.width + padding * 2;
+
+    bgRect.attr("width", bgWidth).attr("height", bgHeight);
+  }
+
   /** 繪製縣市 Choropleth。 */
   function drawCounties() {
     currentView = "counties";
@@ -150,6 +203,8 @@
       .on("click", function (event, d) {
         drillDown(d.properties.COUNTYNAME);
       });
+
+    drawMapTitle("台灣人口分佈地圖", "點擊縣市可查看鄉鎮市區的人口分佈");
   }
 
   /** 下鑽至鄉鎮視圖。 */
@@ -218,6 +273,8 @@
         d3.select(this).attr("stroke-width", 1).attr("stroke", "#fff");
         hideTooltip();
       });
+
+    drawMapTitle(countyName, "點擊鄉鎮可查看詳細資料");
 
     // 新增「查看詳情」連結
     const detailLink = document.createElement("a");
