@@ -21,6 +21,18 @@
   const backBtn = document.getElementById("backBtn");
   const legendEl = document.getElementById("legend");
 
+  /** 判斷目前是否為暗色主題。 */
+  function isDarkTheme() {
+    const theme = document.documentElement.getAttribute("data-theme");
+    if (theme) return theme === "dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+
+  /** 取得地圖邊框色。 */
+  function getStrokeColor() {
+    return isDarkTheme() ? "#555" : "#fff";
+  }
+
   let svg, g;
   let countiesGeo, townsGeo;
   let countyData = [];
@@ -176,7 +188,7 @@
         const info = countyLookup.get(d.properties.COUNTYNAME);
         return info ? colorScale(info.population) : "#ccc";
       })
-      .attr("stroke", "#fff")
+      .attr("stroke", getStrokeColor())
       .attr("stroke-width", 1)
       .style("cursor", "pointer")
       .on("mouseover", function (event, d) {
@@ -197,7 +209,7 @@
         tooltipEl.style.top = event.clientY - 28 + "px";
       })
       .on("mouseout", function () {
-        d3.select(this).attr("stroke-width", 1).attr("stroke", "#fff");
+        d3.select(this).attr("stroke-width", 1).attr("stroke", getStrokeColor());
         hideTooltip();
       })
       .on("click", function (event, d) {
@@ -243,7 +255,7 @@
         const info = townLookup.get(d.properties.TOWNNAME);
         return info ? colorScale(info.population) : "#ccc";
       })
-      .attr("stroke", "#fff")
+      .attr("stroke", getStrokeColor())
       .attr("stroke-width", 1)
       .attr("opacity", 0)
       .transition()
@@ -270,7 +282,7 @@
         tooltipEl.style.top = event.clientY - 28 + "px";
       })
       .on("mouseout", function () {
-        d3.select(this).attr("stroke-width", 1).attr("stroke", "#fff");
+        d3.select(this).attr("stroke-width", 1).attr("stroke", getStrokeColor());
         hideTooltip();
       });
 
