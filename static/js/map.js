@@ -103,9 +103,12 @@
     tooltipEl.classList.remove("visible");
   }
 
-  /** 建立 D3 投影。 */
-  function createProjection(geojson) {
-    return d3.geoMercator().fitSize([WIDTH, HEIGHT], geojson);
+  /** 需要偏移的離島縣市。 */
+  const OUTLYING_COUNTIES = ["金門縣", "連江縣"];
+
+  /** 建立 D3 投影。可傳入 fitGeoJSON 作為 fitSize 的基準範圍。 */
+  function createProjection(geojson, fitGeoJSON) {
+    return d3.geoMercator().fitSize([WIDTH, HEIGHT], fitGeoJSON || geojson);
   }
 
   /** 在 SVG 內部左上角繪製標題 overlay。 */
@@ -171,7 +174,13 @@
     );
 
     const geojson = topojson.feature(countiesGeo, countiesGeo.objects.counties);
-    const projection = createProjection(geojson);
+    const mainlandGeo = {
+      type: "FeatureCollection",
+      features: geojson.features.filter(
+        (f) => !OUTLYING_COUNTIES.includes(f.properties.COUNTYNAME)
+      ),
+    };
+    const projection = createProjection(geojson, mainlandGeo);
     const path = d3.geoPath().projection(projection);
 
     const colorScale = createColorScale(countyData, "population");
@@ -216,7 +225,72 @@
         drillDown(d.properties.COUNTYNAME);
       });
 
+    // ��移離島至左下角
+    offsetOutlyingIslands(projection, path);
+
     drawMapTitle("台灣人口分佈地圖", "點擊縣市可查看鄉鎮市區的人口分佈");
+  }
+
+  /** 將離島路徑偏移至地圖左下角並加上虛線框。 */
+  function offsetOutlyingIslands(projection, path) {
+    // 計算離島目標位置（左下角區域）
+    const targetX = 30;
+    const targetBaseY = HEIGHT - 250;
+    const islandGap = 120;
+
+    OUTLYING_COUNTIES.forEach((county, idx) => {
+      const paths = g.selectAll("path").filter(
+        (d) => d.properties.COUNTYNAME === county
+      );
+      if (paths.empty()) return;
+
+      // 取得離島當前 bounding box 中心
+      const bounds = [];
+      paths.each(function () {
+        const bbox = this.getBBox();
+        bounds.push(bbox);
+      });
+      const combinedBBox = {
+        x: d3.min(bounds, (b) => b.x),
+        y: d3.min(bounds, (b) => b.y),
+        width: d3.max(bounds, (b) => b.x + b.width) - d3.min(bounds, (b) => b.x),
+        height: d3.max(bounds, (b) => b.y + b.height) - d3.min(bounds, (b) => b.y),
+      };
+      const cx = combinedBBox.x + combinedBBox.width / 2;
+      const cy = combinedBBox.y + combinedBBox.height / 2;
+
+      // 計算偏移量
+      const targetCX = targetX + 50;
+      const targetCY = targetBaseY + idx * islandGap + 50;
+      const dx = targetCX - cx;
+      const dy = targetCY - cy;
+
+      paths.attr("transform", `translate(${dx}, ${dy})`);
+
+      // 繪製虛線框
+      const pad = 8;
+      g.append("rect")
+        .attr("class", "outlying-border")
+        .attr("x", targetCX - combinedBBox.width / 2 - pad)
+        .attr("y", targetCY - combinedBBox.height / 2 - pad)
+        .attr("width", combinedBBox.width + pad * 2)
+        .attr("height", combinedBBox.height + pad * 2)
+        .attr("fill", "none")
+        .attr("stroke", "var(--text-light, #718096)")
+        .attr("stroke-width", 1)
+        .attr("stroke-dasharray", "4,3")
+        .attr("rx", 4);
+
+      // 標示縣市名稱
+      g.append("text")
+        .attr("class", "outlying-label")
+        .attr("x", targetCX)
+        .attr("y", targetCY - combinedBBox.height / 2 - pad - 4)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "11px")
+        .attr("fill", "var(--text-light, #718096)")
+        .text(county);
+    });
   }
 
   /** 下鑽至鄉鎮視圖。 */
